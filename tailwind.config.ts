@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,13 +9,27 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+          contrast: "hsl(var(--primary-contrast))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        textColor: {
+          DEFAULT: "hsl(var(--text-primary))",
+          secondary: "hsl(var(--text-secondary))",
+        },
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          foreground: "hsl(var(--background-foreground))",
+          contrast: "hsl(var(--background-contrast))",
+        },
       },
     },
   },
-  plugins: [],
-};
+} satisfies Config;
 export default config;
