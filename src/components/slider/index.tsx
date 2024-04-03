@@ -1,11 +1,13 @@
 "use client";
-import React, { use } from "react";
+import React from "react";
 import SliderBackground from "./slider-background";
 
 import SliderDetail from "./slider-Detail";
 import { SliderItems } from "./list";
 
 import useSlider from "./store";
+
+import ActionSlider from "./action";
 
 interface Props {
   listMovies: {
@@ -43,6 +45,7 @@ function Slider({ listMovies }: Props) {
         </div>
         <div className="w-1/2  rounded-lg">
           <SliderItems listMovies={listMovies} />
+          <ActionSlider />
         </div>
       </div>
     </div>

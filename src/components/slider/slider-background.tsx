@@ -28,6 +28,8 @@ function SliderBackground({ src, alt }: Props) {
           fill
           className="object-cover"
           alt={alt}
+          placeholder="blur"
+          blurDataURL={generateImagePath({ src })}
         />
       </motion.div>
     </AnimatePresence>
