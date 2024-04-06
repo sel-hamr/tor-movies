@@ -36,7 +36,7 @@ function SliderDetail({ overview, title, vote_average }: Props) {
         <DetailDescription>{overview}</DetailDescription>
       </AnimateItem>
 
-      <AnimateItem keyAnimate={rating} delay={0.7}>
+      <AnimateItem keyAnimate={vote_average} delay={0.7}>
         <DetailAction>
           <Button>
             <Clapperboard className="size-4 me-3" />

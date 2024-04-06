@@ -1,54 +1,28 @@
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
-
 interface ButtonProps {
   title: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
-const SpotlightButton = ({ handleClick, title }: ButtonProps) => {
-  const btnRef = useRef<HTMLButtonElement | null>(null);
-  const spanRef = useRef<HTMLSpanElement | null>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { width } = (e.target as HTMLElement)?.getBoundingClientRect();
-      const offset = e.offsetX;
-      const left = `${(offset / width) * 100}%`;
-
-      spanRef.current!.animate({ left }, { duration: 250, fill: "forwards" });
-    };
-
-    const handleMouseLeave = () => {
-      spanRef.current!.animate(
-        { left: "50%" },
-        { duration: 100, fill: "forwards" }
-      );
-    };
-
-    btnRef?.current?.addEventListener("mousemove", handleMouseMove);
-    btnRef?.current?.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      btnRef?.current?.removeEventListener("mousemove", handleMouseMove);
-      btnRef?.current?.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
-
+const SpotlightButton = ({ title, handleClick }: ButtonProps) => {
+  const clipPath =
+    "polygon(0px 0%, calc(100% - 15px) 0%, 100% 15px, 100% 100%, 100% 100%, 0px 100%, 0px 0px)";
   return (
-    <motion.button
-      whileTap={{ scale: 0.985 }}
-      ref={btnRef}
-      className="relative w-full max-w-xs overflow-hidden rounded-lg bg-slate-950 px-4 py-3 text-lg font-medium text-white"
-    >
-      <span className="pointer-events-none relative z-10 mix-blend-difference">
+    <div className="relative w-full h-full">
+      <button
+        className=" bg-primary z-[2] w-full h-full text-white  font-semibold text-lg absolute block border border-background  border-solid tracking-widest active:translate-x-1 active:translate-y-1 active:shadow-lg active:scale-95 transition-transform duration-200 ease-in-out"
+        style={{
+          clipPath,
+        }}
+      >
         {title}
-      </span>
-      <span
-        ref={spanRef}
-        className="pointer-events-none absolute left-[50%] top-[50%] h-32 w-32 -translate-x-[50%] -translate-y-[50%] rounded-full bg-slate-100"
-      />
-    </motion.button>
+      </button>
+      <div
+        className="absolute z-[1] w-full h-full bg-background  translate-x-1 translate-y-1"
+        style={{
+          clipPath,
+        }}
+      ></div>
+    </div>
   );
 };
 
