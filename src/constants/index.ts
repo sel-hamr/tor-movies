@@ -1,1 +1,1 @@
-const IMAGE_MEDIA_BASEURL = "";
+export const VID_SRC = "https://vidsrc.to/embed/";

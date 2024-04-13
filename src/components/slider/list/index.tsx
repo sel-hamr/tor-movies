@@ -25,7 +25,7 @@ export function SliderItems({ listMovies }: ListItemsProps) {
   const { index, handleClick } = useSlider((state) => state);
   return (
     <div className="w-full ">
-      <div className="w-full h-[380px]  flex  items-center overflow-x-hidden ">
+      <div className="w-full h-[380px] flex items-center overflow-x-hidden ">
         <motion.div
           animate={{ x: -(index * 270) }}
           transition={{ duration: 0.5 }}

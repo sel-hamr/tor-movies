@@ -3,21 +3,23 @@
 import { redirect } from "next/navigation";
 import { getQuery, getQueryString } from "./server-utils";
 import { ParamsListMoviesType } from "@/types";
+import { MoreMoviesYtsType, MovieYtsType } from "@/types/movie";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_URL = "https://yts.mx/api/v2/";
+const optionsFetchFromTheMovieDB = {
+  method: "GET",
+  headers: {
+    accept: "application/json",
+    Authorization: `Bearer ${process.env.THE_MOVIESDB_API_KEY}`,
+  },
+};
 
 export const getListTopMoviesFromTheMovieDB = async <T>() => {
-  const url = `${BASE_URL}/movie/top_rated?language=en-US&page=1`;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.THE_MOVIESDB_API_KEY}`,
-    },
-  };
+  const url = `${BASE_URL}/movie/now_playing?language=en-US&page=1`;
+
   try {
-    const response = await fetch(url, options);
+    const response = await fetch(url, optionsFetchFromTheMovieDB);
     return (await response.json()) as T;
   } catch (error) {
     console.error("error:" + error);
@@ -46,5 +48,37 @@ export const getMovies = async <T>(params: ParamsListMoviesType) => {
   } catch (error) {
     console.error(error);
     return [];
+  }
+};
+
+export const getMovieDetail = async <T>(MovieId: string) => {
+  if (!MovieId) {
+    return undefined;
+  }
+  try {
+    const response = await fetch(
+      `${API_URL}movie_details.json?movie_id=${MovieId}&with_images=true&with_cast=true`
+    );
+    const data = await response.json();
+    return data.data.movie as T;
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
+export const getMovieImages = async (MovieId: string) => {
+  if (!MovieId) {
+    return undefined;
+  }
+  const url = `${BASE_URL}/movie/${MovieId}/images`;
+  try {
+    const response = await fetch(url, optionsFetchFromTheMovieDB);
+    const data = await response.json();
+    if (data.backdrops.length === 0) return undefined;
+    return data.backdrops[0] as { file_path: string };
+  } catch (error) {
+    console.error(error);
+    return undefined;
   }
 };
