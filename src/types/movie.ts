@@ -27,6 +27,42 @@ export interface MovieYtsType {
   date_uploaded_unix: number;
 }
 
+export interface CastType {
+  character_name: string;
+  name: string;
+  url_small_image: string;
+  imdb_code: string;
+}
+
+export interface TorrentsType {
+  url: string;
+  hash: string;
+  quality: string;
+  type: string;
+  seeds: number;
+  peers: number;
+  size: string;
+  size_bytes: number;
+  date_uploaded: string;
+  date_uploaded_unix: number;
+}
+export interface MoreMoviesYtsType {
+  cast: CastType[];
+  torrents: TorrentsType[];
+  small_cover_image: string;
+  medium_cover_image: string;
+  large_cover_image: string;
+  medium_screenshot_image1: string;
+  medium_screenshot_image2: string;
+  medium_screenshot_image3: string;
+  large_screenshot_image1: string;
+  large_screenshot_image2: string;
+  large_screenshot_image3: string;
+  description_intro: string;
+  title_long: string;
+  like_count: number;
+}
+
 export interface MovieTheMoviesDb {
   adult: boolean;
   backdrop_path: string;
