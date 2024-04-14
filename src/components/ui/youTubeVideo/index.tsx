@@ -1,16 +1,20 @@
 import { cn } from "@/lib/utils";
 import { YouTubeEmbed } from "@next/third-parties/google";
 
-function YouTubeVideo({
-  embed,
-  className,
-}: {
+interface YouTubeEmbedTypes {
   embed: string;
   className?: string;
-}) {
+  height?: number;
+  width?: number;
+  playlabel?: string;
+  params?: string;
+  style?: string;
+}
+
+function YouTubeVideo({ embed, className, ...props }: YouTubeEmbedTypes) {
   return (
     <div className={cn("w-full h-full", className)}>
-      <YouTubeEmbed videoid={embed} height={400} params="controls=0" />
+      <YouTubeEmbed videoid={embed} params="controls=0" {...props} />
     </div>
   );
 }
