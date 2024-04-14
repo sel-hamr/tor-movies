@@ -20,9 +20,21 @@ export const getListTopMoviesFromTheMovieDB = async <T>() => {
 
   try {
     const response = await fetch(url, optionsFetchFromTheMovieDB);
-    return (await response.json()) as T;
+    const data = await response.json();
+    const listMovies = [];
+    for (let i = 0; i < data.results.length; i++) {
+      const movie = await getMovies<MovieYtsType>({
+        page: 1,
+        query_term: data.results[i].title,
+      });
+      if (movie?.[0]?.id) {
+        listMovies.push({ ...data.results[i], id: movie?.[0].id });
+      }
+    }
+    return { results: listMovies } as T;
   } catch (error) {
     console.error("error:" + error);
+    return undefined;
   }
 };
 
@@ -76,7 +88,38 @@ export const getMovieImages = async (MovieId: string) => {
     const response = await fetch(url, optionsFetchFromTheMovieDB);
     const data = await response.json();
     if (data.backdrops.length === 0) return undefined;
-    return data.backdrops[0] as { file_path: string };
+    return data.backdrops as { file_path: string }[];
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
+export const getMovieVideos = async (MovieId: string) => {
+  if (!MovieId) {
+    return undefined;
+  }
+  const url = `${BASE_URL}/movie/${MovieId}/videos`;
+  try {
+    const response = await fetch(url, optionsFetchFromTheMovieDB);
+    const data = await response.json();
+    if (data.results.length === 0) return undefined;
+    return data.results as { key: string; site: string }[];
+  } catch (error) {
+    console.error(error);
+    return undefined;
+  }
+};
+
+export const getMovieRecommendations = async (MovieId: string) => {
+  if (!MovieId) {
+    return undefined;
+  }
+  const url = `${API_URL}/movie_suggestions.json?movie_id=${MovieId}`;
+  try {
+    const response = await fetch(url, optionsFetchFromTheMovieDB);
+    const data = await response.json();
+    return data?.data.movies as MovieYtsType[] | undefined;
   } catch (error) {
     console.error(error);
     return undefined;

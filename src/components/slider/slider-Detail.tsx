@@ -10,14 +10,16 @@ import {
   DetailHeader,
   DetailTitle,
 } from "./detail";
+import Link from "next/link";
 
 interface Props {
   title: string;
   overview: string;
   vote_average: number;
+  id: number;
 }
 
-function SliderDetail({ overview, title, vote_average }: Props) {
+function SliderDetail({ overview, title, vote_average, id }: Props) {
   let rating = Math.round(vote_average);
   rating = decimalToBase5(rating);
   return (
@@ -38,10 +40,12 @@ function SliderDetail({ overview, title, vote_average }: Props) {
 
       <AnimateItem keyAnimate={vote_average} delay={0.7}>
         <DetailAction>
-          <Button>
-            <Clapperboard className="size-4 me-3" />
-            Watch Now
-          </Button>
+          <Link href={`/movie/${id}`}>
+            <Button>
+              <Clapperboard className="size-4 me-3" />
+              Watch Now
+            </Button>
+          </Link>
         </DetailAction>
       </AnimateItem>
     </Detail>

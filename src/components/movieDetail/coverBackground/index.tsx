@@ -4,11 +4,12 @@ import Image from "next/image";
 
 async function CoverBackground({ imdb_code }: { imdb_code: string }) {
   const images = await getMovieImages(imdb_code);
+  const src = images?.[0]?.file_path;
   return (
     <div className="w-full h-[750px] relative">
-      {images?.file_path && (
+      {src && (
         <Image
-          src={generateImagePath({ src: images?.file_path })}
+          src={generateImagePath({ src })}
           fill
           alt={imdb_code}
           className="object-cover"

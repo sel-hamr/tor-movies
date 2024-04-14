@@ -22,7 +22,7 @@ function Gallery({
     <>
       <p className="text-white text-2xl mb-4">Gallery</p>
       <div className="grid-cols-2 grid-rows-11 grid h-[370px] gap-1">
-        <div className="col-span-2 row-span-4">
+        <div className="col-span-2 row-span-4 ">
           <YouTubeVideo embed={yt_trailer_code} />
         </div>
         <div className="relative col-span-1 row-span-3">
@@ -30,7 +30,7 @@ function Gallery({
             src={medium_screenshot_image3}
             alt={title_english}
             fill
-            objectFit="cover"
+            className="object-cover "
           />
         </div>
         <div className="relative col-span-1 row-span-3">
@@ -38,7 +38,7 @@ function Gallery({
             src={medium_screenshot_image2}
             alt={title_english}
             fill
-            objectFit="cover"
+            className="object-cover "
           />
         </div>
         <div className="relative col-span-2 row-span-4">
@@ -46,7 +46,7 @@ function Gallery({
             src={medium_screenshot_image1}
             alt={title_english}
             fill
-            objectFit="cover"
+            className="object-cover "
           />
         </div>
       </div>

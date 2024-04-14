@@ -1,15 +1,15 @@
+import Action from "@/components/movieDetail/action";
 import Cast from "@/components/movieDetail/cast";
 import CoverBackground from "@/components/movieDetail/coverBackground";
 import DetailMovie from "@/components/movieDetail/detailMovie";
 import Gallery from "@/components/movieDetail/gallery";
 import Info from "@/components/movieDetail/info";
 import Intro from "@/components/movieDetail/intro";
+import Media from "@/components/movieDetail/media";
 import Storyline from "@/components/movieDetail/storyline";
-import Loading from "@/components/ui/loading";
-import StreamMovie from "@/components/ui/streamMovie";
+import Suggestions from "@/components/movieDetail/suggestions";
 import { getMovieDetail } from "@/lib/action";
 import { MoreMoviesYtsType, MovieYtsType } from "@/types/movie";
-import { Suspense } from "react";
 
 async function page({ params }: { params: { slug: string } }) {
   const movieId = params.slug;
@@ -25,6 +25,7 @@ async function page({ params }: { params: { slug: string } }) {
     cast,
     mpa_rating,
     imdb_code,
+    yt_trailer_code,
   } = movie;
   return (
     <div className="flex min-h-screen flex-col items-center">
@@ -39,10 +40,12 @@ async function page({ params }: { params: { slug: string } }) {
         <div className="w-full h-full pt-6">
           <div className="grid grid-cols-10 grid-rows-6 gap-7 ">
             <div className="col-span-2 row-span-6 ">
-              <img
-                src={large_cover_image}
-                alt={title}
-                className="object-contain w-full  rounded-md"
+              <Action
+                large_cover_image={large_cover_image}
+                title={title}
+                yt_trailer_code={yt_trailer_code}
+                urlStream={`movie/${imdb_code}`}
+                imdb_code={imdb_code}
               />
             </div>
             <div className="col-span-6 row-span-4 col-start-3 divide-y gap-3 flex flex-col">
@@ -64,9 +67,8 @@ async function page({ params }: { params: { slug: string } }) {
             </div>
           </div>
         </div>
-      </div>
-      <div className="w-10/12 mx-auto h-[750px]">
-        <StreamMovie url={`movie/${imdb_code}`} />
+        <Media imdb_code={imdb_code} />
+        <Suggestions imdb_code={movieId} />
       </div>
     </div>
   );
