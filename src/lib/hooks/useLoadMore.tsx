@@ -8,25 +8,25 @@ interface LoadMoreProps<TypeList> {
 function useLoadMore<T>({ initList, fetch }: LoadMoreProps<T>) {
   const { ref, inView } = useInView();
   const [list, setListMovies] = useState(initList);
+  const [page, setPage] = useState(2);
   const [isFinished, setIsFinished] = useState(false);
-  const page = useRef(2);
 
   useEffect(() => {
     if (inView) {
       const fetchData = async () => {
-        const data = await fetch(page.current);
-        if (Array.isArray(data)) {
+        const data = await fetch(page);
+        if (Array.isArray(data) && data.length !== 0) {
           if (data.length !== 0) {
           }
           setListMovies([...list, ...data]);
         } else setIsFinished(true);
-        ++page.current;
+        setPage((prev) => prev + 1);
       };
       fetchData();
     }
   }, [inView]);
 
-  return { ref, list, isFinished };
+  return { ref, list, isFinished, page };
 }
 
 export default useLoadMore;
