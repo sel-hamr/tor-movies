@@ -3,7 +3,7 @@
 import { redirect } from "next/navigation";
 import { getQuery, getQueryString } from "./server-utils";
 import { ParamsListMoviesType } from "@/types";
-import { MoreMoviesYtsType, MovieYtsType } from "@/types/movie";
+import { MovieYtsType } from "@/types/movie";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_URL = "https://yts.mx/api/v2/";
@@ -49,14 +49,14 @@ export const getMovies = async <T>(params: ParamsListMoviesType) => {
     ...params,
     sort_by: params.sort_by || "like_count",
   };
-  if (nameMovies) {
+  if (nameMovies && !params?.query_term) {
     newParams.query_term = nameMovies;
   }
   try {
     const UrlParams = getQueryString(newParams);
     const response = await fetch(`${API_URL}list_movies.json?${UrlParams}`);
     const data = await response.json();
-    return data.data.movies as T[];
+    return (data?.data?.movies || []) as T[];
   } catch (error) {
     console.error(error);
     return [];

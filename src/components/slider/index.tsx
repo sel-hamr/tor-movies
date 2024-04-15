@@ -22,8 +22,8 @@ function Slider({ listMovies }: Props) {
   return (
     <div className="w-full h-[700px] overflow-hidden">
       <SliderBackground
-        src={movieActive.backdrop_path}
-        alt={movieActive.title}
+        src={movieActive?.backdrop_path}
+        alt={movieActive?.title}
       />
       <div className="absolute top-0 left-0 w-full h-[700px] ps-11 gap-x-14 z-20 flex items-center justify-center">
         <div className="w-1/2 ">

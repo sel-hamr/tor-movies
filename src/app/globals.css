@@ -31,3 +31,17 @@
     --text-secondary: 0 0% 62%;
   }
 }
+
+@layer components {
+  .cardWrapper {
+    @apply relative overflow-hidden w-full h-full bg-background;
+  }
+  .cardWrapper::before {
+    background: conic-gradient(
+      from -55deg,
+      rgba(167, 139, 250, 0) 75%,
+      hsl(var(--primary)) 100%
+    ) !important;
+    @apply absolute  h-[100%] w-[100%] content-[''] animate-border-spin;
+  }
+}
