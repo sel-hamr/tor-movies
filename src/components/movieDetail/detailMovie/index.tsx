@@ -14,7 +14,7 @@ function DetailMovie({
 }: MovieYtsType & MoreMoviesYtsType) {
   return (
     <>
-      <div className="flex flex-col ">
+      <div className="hidden flex-col md:flex">
         <div className="flex gap-8">
           <p className="text-2xl text-white font-semibold">{title_english}</p>
           <p className="border border-solid border-white px-3 py-[2px] text-white rounded-md">
@@ -25,7 +25,7 @@ function DetailMovie({
           {description_intro}
         </p>
       </div>
-      <div className="flex pt-3 divide-x gap-3">
+      <div className="md:flex hidden pt-3 divide-x gap-3">
         <div className="flex ">
           <Eye size={24} className="text-white " />
           <p className=" ml-2 text-white">{like_count}</p>

@@ -25,11 +25,11 @@ function Slider({ listMovies }: Props) {
         src={movieActive?.backdrop_path}
         alt={movieActive?.title}
       />
-      <div className="absolute top-0 left-0 w-full h-[700px] ps-11 gap-x-14 z-20 flex items-center justify-center">
-        <div className="w-1/2 ">
+      <div className="absolute top-0 left-0 w-full h-[700px] md:ps-11 ps-2 gap-x-14 z-20 flex items-center justify-center flex-col md:flex-row">
+        <div className="md:w-1/2 w-full">
           <SliderDetail {...movieActive} />
         </div>
-        <div className="w-1/2  rounded-lg">
+        <div className="md:w-1/2 w-full rounded-lg">
           <SliderItems listMovies={listMovies} />
           <ActionSlider />
         </div>

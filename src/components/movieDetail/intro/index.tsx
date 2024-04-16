@@ -8,7 +8,7 @@ function Intro({ title_long, rating, mpa_rating }: Props) {
   return (
     <div className="flex justify-between ">
       <p className="font-semibold text-3xl text-white">{title_long}</p>
-      <div className="gap-4 flex">
+      <div className="gap-4 md:flex hidden">
         <p className="px-4 py-1 bg-[#f9f9f970] text-white rounded-md leading-[27px]">
           IMDb {rating}
         </p>
