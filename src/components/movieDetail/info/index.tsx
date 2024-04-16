@@ -37,7 +37,7 @@ function Info({
           <p className="text-textColor-secondary">{language}</p>
         </div>
         <div className="flex gap-4 items-center">
-          <p className="text-white font-semibold">Genres :</p>
+          <p className="text-white font-semibold w-[90px]">Genres :</p>
           <p className="text-textColor-secondary">{genres.join(" , ")}</p>
         </div>
       </div>

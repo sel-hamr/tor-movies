@@ -38,7 +38,7 @@ async function page({ params }: { params: { slug: string } }) {
           mpa_rating={mpa_rating}
         />
         <div className="w-full h-full pt-6">
-          <div className="grid grid-cols-10 grid-rows-6 gap-7 ">
+          <div className="flex md:grid grid-cols-10 grid-rows-6 gap-7 flex-col ">
             <div className="col-span-2 row-span-6 ">
               <Action
                 large_cover_image={large_cover_image}
@@ -50,7 +50,7 @@ async function page({ params }: { params: { slug: string } }) {
             </div>
             <div className="col-span-6 row-span-4 col-start-3 divide-y gap-3 flex flex-col">
               <DetailMovie {...movie} />
-              <div className="flex h-full pt-5 gap-6">
+              <div className="flex h-full pt-5 gap-6 flex-col md:flex-row">
                 <div className="flex-1">
                   <Info {...movie} />
                 </div>
@@ -59,7 +59,7 @@ async function page({ params }: { params: { slug: string } }) {
                 </div>
               </div>
             </div>
-            <div className="col-span-2 row-span-4 col-start-9 ">
+            <div className="col-span-2 row-span-4 col-start-9 hidden md:block ">
               <Gallery {...movie} />
             </div>
             <div className="col-span-8 row-span-2 col-start-3 row-start-5 text-white border-t border-solid border-white pt-6">

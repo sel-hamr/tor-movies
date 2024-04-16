@@ -17,8 +17,8 @@ function list({
   return (
     <Carousel className={cn("w-[90%] mx-auto h-[500px]", className)}>
       <CarouselContent>{children}</CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hidden md:block" />
+      <CarouselNext className="hidden md:block" />
     </Carousel>
   );
 }
