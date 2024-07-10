@@ -13,6 +13,7 @@ const optionsFetchFromTheMovieDB = {
     accept: "application/json",
     Authorization: `Bearer ${process.env.THE_MOVIESDB_API_KEY}`,
   },
+  next: { revalidate: 86400 },
 };
 
 export const getListTopMoviesFromTheMovieDB = async <T>() => {
@@ -54,7 +55,9 @@ export const getMovies = async <T>(params: ParamsListMoviesType) => {
   }
   try {
     const UrlParams = getQueryString(newParams);
-    const response = await fetch(`${API_URL}list_movies.json?${UrlParams}`);
+    const response = await fetch(`${API_URL}list_movies.json?${UrlParams}`, {
+      next: { revalidate: 86400 },
+    });
     const data = await response.json();
     return (data?.data?.movies || []) as T[];
   } catch (error) {
