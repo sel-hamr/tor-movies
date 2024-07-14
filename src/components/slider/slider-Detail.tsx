@@ -1,7 +1,7 @@
 import { Clapperboard } from "lucide-react";
 import Rating from "../ui/rating";
 import { Button } from "../ui/button";
-import { decimalToBase5 } from "@/lib/utils";
+import { convertRatingToBase5 } from "@/lib/utils";
 import {
   AnimateItem,
   Detail,
@@ -20,14 +20,23 @@ interface Props {
 }
 
 function SliderDetail({ overview, title, vote_average, id }: Props) {
-  let rating = Math.round(vote_average);
-  rating = decimalToBase5(rating);
+  console.log(
+    "SliderDetail -> vote_average",
+    vote_average,
+    convertRatingToBase5(vote_average)
+  );
   return (
     <Detail>
       <AnimateItem keyAnimate={vote_average} delay={0}>
         <DetailHeader>
-          <Rating value={rating} totalStars={5} size={30} />
-          <p className="text-white text-sm mt-2">{vote_average} / 10</p>
+          <Rating
+            value={convertRatingToBase5(vote_average)}
+            totalStars={5}
+            size={30}
+          />
+          <p className="text-white text-sm mt-2">
+            {vote_average.toFixed(2)} / 10
+          </p>
         </DetailHeader>
       </AnimateItem>
 
