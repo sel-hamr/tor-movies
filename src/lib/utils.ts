@@ -26,16 +26,10 @@ export function generateImagePath(params: GenerateImagePathParams) {
   return url;
 }
 
-export function decimalToBase5(number: number) {
-  if (number === 0) {
-    return 0;
+export function convertRatingToBase5(ratingOutOf10: number): number {
+  if (ratingOutOf10 < 0 || ratingOutOf10 > 10) {
+    throw new Error("Rating must be between 0 and 10.");
   }
 
-  let result: string = "";
-  while (number > 0) {
-    let remainder: number = number % 5;
-    result = remainder + result;
-    number = Math.floor(number / 5);
-  }
-  return parseInt(result);
+  return ratingOutOf10 / 2;
 }

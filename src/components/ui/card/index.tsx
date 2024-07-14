@@ -25,7 +25,7 @@ function Card({
   const rating = vote_average.toFixed(2);
   return (
     <motion.div
-      className="w-[230px] shrink-0 h-[330px] bg-black  shadow-lg relative mx-5 cursor-pointer"
+      className="w-[230px] shrink-0 h-[330px] bg-black rounded-lg shadow-lg relative mx-5 cursor-pointer"
       onClick={handleClick}
       style={{ scale: isActive ? "1.1" : "1" }}
     >
